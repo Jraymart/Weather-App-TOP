@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>THE WEATHER</title>
+  </head>
+  <body>
+    <script>
+      // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/[date2]?key=YOUR_API_KEY
+      // Key: YEK9UJXMAXYY8F3CUHTJCWD3E
+
+      const virtualCrossingURL =
+        "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
+      const virtualCrossingKey = "?key=YEK9UJXMAXYY8F3CUHTJCWD3E";
+      const currentDate = new Date().toJSON().slice(0, 10);
+      async function getWeatherToday(location) {
+        const url =
+          virtualCrossingURL + currentDate + location + virtualCrossingKey;
+        const urlResponse = await fetch(url);
+        urlResponse.json().then(function (data) {
+          getTemp(data);
+          console.log(data);
+        });
+      }
+
+      getWeatherToday("Vancouver");
+
+      function getTemp(data) {
+        console.log(data.currentConditions.temp);
+      }
+    </script>
+  </body>
+</html>
