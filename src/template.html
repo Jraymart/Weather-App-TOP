@@ -3,32 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>THE WEATHER</title>
+    <title>Forecast Rock</title>
+    <style>
+      * {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        margin: 0;
+      }
+      footer {
+        text-align: center;
+      }
+      body {
+        background-color: #f1f6fd;
+      }
+
+      header{
+        background-color: #202a4b;
+        color: #f1f6fd;
+        font-size: .8rem;
+        padding: 1rem;
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+      }
+
+      .logo{
+        display: grid;
+        grid-template-rows: .5fr .5fr;
+        grid-template-columns: 1fr 5fr;
+        column-gap: 5px;
+        >*{border: 1px solid black;}
+      
+      }
+      .logo>img{
+        width:55px;
+        grid-row: 1 / 3;
+        grid-column: 1 / 2;
+        justify-self: end;
+        align-self: center;
+      }
+      .logo>p{
+          font-style: italic;
+  
+      }
+       
+
+      
+    </style>
   </head>
   <body>
-    <script>
-      // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/[date2]?key=YOUR_API_KEY
-      // Key: YEK9UJXMAXYY8F3CUHTJCWD3E
+    <header>
+      <div class="logo">
+        <img src="./img/rock.png" alt="">
+        <h1>THE FORECAST ROCK</h1>
+        <p>Oh great weather stone, tell us of our conditions</p>
+      </div>
+      <div class = "search">
 
-      const virtualCrossingURL =
-        "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
-      const virtualCrossingKey = "?key=YEK9UJXMAXYY8F3CUHTJCWD3E";
-      const currentDate = new Date().toJSON().slice(0, 10);
-      async function getWeatherToday(location) {
-        const url =
-          virtualCrossingURL + currentDate + location + virtualCrossingKey;
-        const urlResponse = await fetch(url);
-        urlResponse.json().then(function (data) {
-          getTemp(data);
-          console.log(data);
-        });
-      }
-
-      getWeatherToday("Vancouver");
-
-      function getTemp(data) {
-        console.log(data.currentConditions.temp);
-      }
-    </script>
+      </div>
+    </header>
+    <div class="container">
+      
+      </div>
+    </div>
   </body>
+  <footer>@2025 Jraymart</footer>
 </html>
