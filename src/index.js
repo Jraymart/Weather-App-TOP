@@ -1,3 +1,6 @@
+import "./style.css";
+import "./reset.css";
+
 // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/[date2]?key=YOUR_API_KEY
 // Key: YEK9UJXMAXYY8F3CUHTJCWD3E
 const virtualCrossingURL =
@@ -10,12 +13,7 @@ let weatherData = null;
 
 async function getWeather(location) {
   try {
-    const url =
-      virtualCrossingURL +
-      currentDate +
-      location +
-      virtualCrossingKey +
-      `&unitGroup=${unit}`;
+    const url = `${virtualCrossingURL}${location}/${currentDate}${virtualCrossingKey}&unitGroup=${unit}`;
     const urlResponse = await fetch(url);
     const data = await urlResponse.json();
 
@@ -60,7 +58,3 @@ function toggleUnit() {
 }
 // toggleUnit();
 getWeather("Vancouver");
-
-function getTemp(data) {
-  console.log(data.currentConditions.temp);
-}
