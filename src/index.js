@@ -10,7 +10,7 @@ const currentDate = new Date().toJSON().slice(0, 10);
 
 let unit = "metric";
 let weatherData = null;
-
+let weatherLocation = null;
 async function getWeather(location) {
   try {
     const url = `${virtualCrossingURL}${location}/${currentDate}${virtualCrossingKey}&unitGroup=${unit}`;
@@ -18,6 +18,7 @@ async function getWeather(location) {
     const data = await urlResponse.json();
 
     weatherData = data;
+    weatherLocation = weatherData.resolvedAddress;
     displayWeather();
   } catch (error) {
     console.log(error);
@@ -35,16 +36,42 @@ function displayWeather() {
 }
 
 function processWeatherDataToday(data) {
-  console.log(data);
-  console.log(data.datetime);
-  console.log(data.temp);
+  const location = document.querySelector(".location > h1");
+  location.textContent = weatherLocation;
+
+  const weatherIcon = document.querySelector(".icon");
+  weatherIcon.src = require(`./img/WeatherIcons/${data.icon}.svg`);
+  const temp = document.querySelector(".current > h2");
+  if (unit == "metric") {
+    temp.innerHTML = data.temp + ` &deg;C`;
+  } else {
+    temp.innerHTML = data.temp + ` &deg;F`;
+  }
+
+  const datetime = document.querySelector(".date > h2");
+  datetime.textContent = formatDate(data.datetime);
+
+  const high = document.querySelector(".high");
+  high.innerHTML = "High: " + data.tempmax + `&deg;`;
+  const low = document.querySelector(".low");
+  low.innerHTML = "Low: " + data.tempmin + `&deg;`;
+
+  const conditions = document.querySelector(".conditions > p");
+  conditions.textContent = data.description;
   console.log(data.feelslike);
   console.log(data.conditions);
   console.log(data.description);
-  console.log(data.tempmin);
-  console.log(data.tempmax);
 }
 
+function formatDate(datetime) {
+  const date = new Date(datetime);
+
+  return new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  }).format(date);
+}
 function processWeatherData(data) {
   // console.log(data);
   console.log(data.datetime);
@@ -55,6 +82,18 @@ function processWeatherData(data) {
 
 function toggleUnit() {
   unit = unit === "metric" ? "us" : "metric";
+  displayWeather();
 }
+const searchForm = document.querySelector(".search-form");
+searchForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const search = document.querySelector("#search").value.trim();
+  getWeather(search);
+});
+const unitBtn = document.querySelector("#checkbox-toggle");
+unitBtn.addEventListener("click", () => {
+  toggleUnit();
+  getWeather(weatherLocation);
+});
 // toggleUnit();
 getWeather("Vancouver");
