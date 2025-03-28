@@ -1,8 +1,6 @@
 import "./style.css";
 import "./reset.css";
 
-// https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/[date2]?key=YOUR_API_KEY
-// Key: YEK9UJXMAXYY8F3CUHTJCWD3E
 const virtualCrossingURL =
   "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
 const virtualCrossingKey = "";
