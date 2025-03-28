@@ -7,91 +7,141 @@
   <title>Forecast Rock</title>
   <style>
     .container {
-      display: grid;
-      grid-template-rows: .5fr 4fr 3fr;
-      grid-template-columns: 1fr;
-      height: 110vh;
-      margin: 0 10%;
-      padding: 2rem;
-      gap: 1rem;
-    }
+  display: grid;
+  grid-template-rows: 1fr 10fr 4fr;
+  grid-template-columns: 1fr;
+  height: 100%;
+  margin: 0 5%;
+  padding: 2rem;
+  gap: 2rem;
+}
 
-    .container>* {
-      border: 1px solid red;
-    }
+/* General Styling for Child Elements */
+.container > div > * {
+  background-color: #344b99;
+}
 
-    .location-container>div>h1 {
-      font-size: 2.5rem;
-      padding: .5rem 2rem;
-      color: #f1f6fd;
-    }
+/* Location Container */
+.location-container > div > h1 {
+  font-size: 2.5rem;
+  padding: 0.5rem 2rem;
+  color: #f1f6fd;
+}
 
-      {
-      border-radius: 50px;
-    }
+/* Grid Layouts */
+.week-container,
+.today-container {
+  display: grid;
+  gap: 1rem;
+}
 
-    .container>div>* {
-      background-color: #344b99;
-    }
+.week-container {
+  grid-template-columns: repeat(7, 1fr);
+}
 
-    .today-container>* {}
+.today-container {
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
 
-    .today-container {
-      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      display: grid;
-      gap: 1rem;
-    }
+/* Card Styling */
+.today-container > div,
+.location-container > div,
+.week-container > div {
+  border-radius: 50px;
+  box-shadow: 0px 2px 5px 0px #202a4b;
+}
 
-    .today-container>div,
-    .location-container>div {
-      border-radius: 50px;
-      box-shadow: 0px 2px 5px 0px #202a4b;
-    }
+/* Today's Temperature Section */
+.today-temp {
+  grid-row: 1 / 3;
+  grid-column: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color: #f1f6fd;
+  padding: 15px;
+}
 
-    .today-temp {
-      grid-row: 1/3;
-      grid-column: 1/2;
-      display:flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      color: #f1f6fd;
-      padding:15px;
-    }
-    .today-temp > .icon{
-      width: 80%;
-    }
+.today-temp > .icon {
+  width: 80%;
+}
 
-    .temperatures{
-      display: flex;
-      align-items: center;
-      gap:15px;
-      width: 90%;
-      justify-content: space-around;
-    }
+/* Temperature Display */
+.temperatures {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 90%;
+  justify-content: space-around;
+}
 
-    .current , .high-low{
-      background-color: #202a4b;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      border-radius: 25px;
-      padding: .5rem;
-    }
-    .date {
-      background-color: #202a4b;
-      width: 90%;
-      text-align: center;
-      padding: .5rem;
-      border-radius: 25px;
-    }
- 
-  
+.current,
+.high-low {
+  background-color: #202a4b;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 25px;
+  padding: 0.5rem;
+}
+
+.current {
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.current > img {
+  filter: invert(50);
+  width: 3rem;
+}
+
+/* Date Display */
+.date {
+  background-color: #202a4b;
+  width: 90%;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 25px;
+}
+
+/* Conditions Section */
+.conditions {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* Today's Conditions Grid */
+.today-conditions {
+  display: grid;
+  grid-template-rows: 4fr 1fr;
+  grid-template-columns: 1fr;
+  padding: 1.2rem;
+}
+
+/* Condition Titles & Data */
+.condition-title {
+  grid: 0 / 1 / 1 / 2;
+  font-size: 1.5rem;
+}
+
+.condition-title,
+.condition-data {
+  color: #f1f6fd;
+  text-align: center;
+  align-self: center;
+}
+
+.condition-data {
+  font-weight: bold;
+  font-size: 5rem;
+}
+
   </style>
 </head>
 
@@ -121,6 +171,7 @@
       </label>
     </div>
   </header>
+
   <div class="container">
     <div class="location-container">
       <div class="location">
@@ -129,18 +180,24 @@
     </div>
     <div class="today-container">
       <div class="today-temp">
-        <div class="date"><h2></h2></div>
+        <div class="date">
+          <h2></h2>
+        </div>
         <img class="icon" src="./img/WeatherIcons/clear-day.svg" alt="">
-        <div class="conditions"><p></p></div>
+        <div class="conditions">
+          <p></p>
+        </div>
         <div class="temperatures">
-          <div class="current"><h2></h2></div>
-          <b>|</b>
+          <div class="current"><img src="./img/thermometer-measure-temp-svgrepo-com.svg" alt="">
+            <h2></h2>
+          </div>
           <div class="high-low">
             <h4 class="high">High</h4>
             <h4 class="low">Low</h4>
           </div>
         </div>
       </div>
+
       <div class="today-conditions"></div>
       <div class="today-conditions"></div>
       <div class="today-conditions"></div>
@@ -150,14 +207,15 @@
       <div class="today-conditions"></div>
       <div class="today-conditions"></div>
     </div>
+
     <div class="week-container">
-      <div class="day1"></div>
-      <div class="day2"></div>
-      <div class="day3"></div>
-      <div class="day4"></div>
-      <div class="day5"></div>
-      <div class="day6"></div>
-      <div class="day7"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
     </div>
   </div>
   </div>

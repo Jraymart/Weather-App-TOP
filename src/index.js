@@ -6,11 +6,13 @@ import "./reset.css";
 const virtualCrossingURL =
   "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
 const virtualCrossingKey = "?key=YEK9UJXMAXYY8F3CUHTJCWD3E";
+
 const currentDate = new Date().toJSON().slice(0, 10);
 
 let unit = "metric";
 let weatherData = null;
 let weatherLocation = null;
+
 async function getWeather(location) {
   try {
     const url = `${virtualCrossingURL}${location}/${currentDate}${virtualCrossingKey}&unitGroup=${unit}`;
@@ -21,7 +23,7 @@ async function getWeather(location) {
     weatherLocation = weatherData.resolvedAddress;
     displayWeather();
   } catch (error) {
-    console.log(error);
+    console.log("Error fetching weather data:", error);
   }
 }
 
@@ -29,40 +31,71 @@ function displayWeather() {
   const today = weatherData.days[0];
   processWeatherDataToday(today);
 
-  const week = weatherData.days.slice(1, 8);
-  week.forEach((day) => {
+  weatherData.days.slice(1, 8).forEach((day) => {
     processWeatherData(day);
   });
 }
 
 function processWeatherDataToday(data) {
-  const location = document.querySelector(".location > h1");
-  location.textContent = weatherLocation;
+  document.querySelector(".location > h1").textContent = weatherLocation;
+  document.querySelector(
+    ".icon"
+  ).src = require(`./img/WeatherIcons/${data.icon}.svg`);
+  document.querySelector(".current > h2").innerHTML = `${data.temp} &deg;${
+    unit === "metric" ? "C" : "F"
+  }`;
+  document.querySelector(".date > h2").textContent = formatDate(data.datetime);
+  document.querySelector(".high").innerHTML = "High: " + data.tempmax + `&deg;`;
+  document.querySelector(".low").innerHTML = "Low: " + data.tempmin + `&deg;`;
+  document.querySelector(".conditions > p").textContent = data.description;
 
-  const weatherIcon = document.querySelector(".icon");
-  weatherIcon.src = require(`./img/WeatherIcons/${data.icon}.svg`);
-  const temp = document.querySelector(".current > h2");
-  if (unit == "metric") {
-    temp.innerHTML = data.temp + ` &deg;C`;
-  } else {
-    temp.innerHTML = data.temp + ` &deg;F`;
-  }
-
-  const datetime = document.querySelector(".date > h2");
-  datetime.textContent = formatDate(data.datetime);
-
-  const high = document.querySelector(".high");
-  high.innerHTML = "High: " + data.tempmax + `&deg;`;
-  const low = document.querySelector(".low");
-  low.innerHTML = "Low: " + data.tempmin + `&deg;`;
-
-  const conditions = document.querySelector(".conditions > p");
-  conditions.textContent = data.description;
-  console.log(data.feelslike);
-  console.log(data.conditions);
-  console.log(data.description);
+  updateConditions(data);
 }
 
+function updateConditions(data) {
+  const conditionValues = [
+    `${data.feelslike}°`,
+    `${data.windspeed}`,
+    `${data.cloudcover}%`,
+    `${data.humidity}%`,
+    data.uvindex,
+    `${data.precipprob}%`,
+    formatTime(data.sunrise),
+    formatTime(data.sunset),
+  ];
+
+  const conditionTitles = [
+    "Feels Like",
+    `Wind Speed${unit === "metric" ? " (km/h)" : " (mi/hr)"}`,
+    "Cloud Cover",
+    "Humidity",
+    "UV Index",
+    "Rain %",
+    "Sunrise (AM)",
+    "Sunset (PM)",
+  ];
+
+  document.querySelectorAll(".today-conditions").forEach((div, index) => {
+    div.innerHTML = `
+      <div class="condition-data">${conditionValues[index]}</div>
+      <div class="condition-title">${conditionTitles[index]}</div>
+    `;
+  });
+}
+
+function formatTime(time) {
+  const [hours, minutes] = time.split(":");
+  const date = new Date();
+  date.setHours(hours, minutes);
+
+  return date
+    .toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })
+    .replace(/ AM| PM/, "");
+}
 function formatDate(datetime) {
   const date = new Date(datetime);
 

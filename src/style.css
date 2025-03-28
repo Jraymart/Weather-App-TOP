@@ -5,6 +5,12 @@
 }
 footer {
   text-align: center;
+  height: 50px;
+  background-color: #202a4b;
+  padding: 10px;
+  font-size: large;
+  color: #f1f6fd;
+  font-weight: bold;
 }
 body {
   background-color: #5888d9;
