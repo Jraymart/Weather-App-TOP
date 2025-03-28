@@ -5,144 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Forecast Rock</title>
-  <style>
-    .container {
-  display: grid;
-  grid-template-rows: 1fr 10fr 4fr;
-  grid-template-columns: 1fr;
-  height: 100%;
-  margin: 0 5%;
-  padding: 2rem;
-  gap: 2rem;
-}
-
-/* General Styling for Child Elements */
-.container > div > * {
-  background-color: #344b99;
-}
-
-/* Location Container */
-.location-container > div > h1 {
-  font-size: 2.5rem;
-  padding: 0.5rem 2rem;
-  color: #f1f6fd;
-}
-
-/* Grid Layouts */
-.week-container,
-.today-container {
-  display: grid;
-  gap: 1rem;
-}
-
-.week-container {
-  grid-template-columns: repeat(7, 1fr);
-}
-
-.today-container {
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-}
-
-/* Card Styling */
-.today-container > div,
-.location-container > div,
-.week-container > div {
-  border-radius: 50px;
-  box-shadow: 0px 2px 5px 0px #202a4b;
-}
-
-/* Today's Temperature Section */
-.today-temp {
-  grid-row: 1 / 3;
-  grid-column: 1 / 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  color: #f1f6fd;
-  padding: 15px;
-}
-
-.today-temp > .icon {
-  width: 80%;
-}
-
-/* Temperature Display */
-.temperatures {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  width: 90%;
-  justify-content: space-around;
-}
-
-.current,
-.high-low {
-  background-color: #202a4b;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border-radius: 25px;
-  padding: 0.5rem;
-}
-
-.current {
-  flex-direction: row;
-  gap: 0.5rem;
-}
-
-.current > img {
-  filter: invert(50);
-  width: 3rem;
-}
-
-/* Date Display */
-.date {
-  background-color: #202a4b;
-  width: 90%;
-  text-align: center;
-  padding: 0.5rem;
-  border-radius: 25px;
-}
-
-/* Conditions Section */
-.conditions {
-  text-align: center;
-  font-size: 1.5rem;
-}
-
-/* Today's Conditions Grid */
-.today-conditions {
-  display: grid;
-  grid-template-rows: 4fr 1fr;
-  grid-template-columns: 1fr;
-  padding: 1.2rem;
-}
-
-/* Condition Titles & Data */
-.condition-title {
-  grid: 0 / 1 / 1 / 2;
-  font-size: 1.5rem;
-}
-
-.condition-title,
-.condition-data {
-  color: #f1f6fd;
-  text-align: center;
-  align-self: center;
-}
-
-.condition-data {
-  font-weight: bold;
-  font-size: 5rem;
-}
-
-  </style>
 </head>
 
 <body>
@@ -209,13 +71,62 @@
     </div>
 
     <div class="week-container">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
+      <div class="day">
+        <div class="date">
+          <h3></h3>
+        </div>
+        <img src="./img/WeatherIcons/clear-day.svg" alt="" class="icon">
+        <p></p>
+        <div class="day-conditions"><p></p></div>
+      </div>
+      <div class="day">
+        <div class="date">
+          <h3></h3>
+        </div>
+        <img src="./img/WeatherIcons/clear-day.svg" alt="" class="icon">
+        <p></p>
+        <div class="day-conditions"><p></p></div>
+      </div>
+      <div class="day">
+        <div class="date">
+          <h3></h3>
+        </div>
+        <img src="./img/WeatherIcons/clear-day.svg" alt="" class="icon">
+        <p></p>
+        <div class="day-conditions"><p></p></div>
+      </div>
+      <div class="day">
+        <div class="date">
+          <h3></h3>
+        </div>
+        <img src="./img/WeatherIcons/clear-day.svg" alt="" class="icon">
+        <p></p>
+        <div class="day-conditions"><p></p></div>
+      </div>
+      <div class="day">
+        <div class="date">
+          <h3></h3>
+        </div>
+        <img src="./img/WeatherIcons/clear-day.svg" alt="" class="icon">
+        <p></p>
+        <div class="day-conditions"><p></p></div>
+      </div>
+      <div class="day">
+        <div class="date">
+          <h3></h3>
+        </div>
+        <img src="./img/WeatherIcons/clear-day.svg" alt="" class="icon">
+        <p></p>
+        <div class="day-conditions"><p></p></div>
+      </div>
+      <div class="day">
+        <div class="date">
+          <h3></h3>
+        </div>
+        <img src="./img/WeatherIcons/clear-day.svg" alt="" class="icon">
+        <p></p>
+        <div class="day-conditions"><p></p></div>
+      </div>
     </div>
   </div>
   </div>

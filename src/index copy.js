@@ -15,7 +15,7 @@ let weatherLocation = null;
 
 async function getWeather(location) {
   try {
-    const url = `${virtualCrossingURL}${location}/${virtualCrossingKey}&unitGroup=${unit}`;
+    const url = `${virtualCrossingURL}${location}/${currentDate}${virtualCrossingKey}&unitGroup=${unit}`;
     const urlResponse = await fetch(url);
     const data = await urlResponse.json();
 
@@ -31,27 +31,9 @@ function displayWeather() {
   const today = weatherData.days[0];
   processWeatherDataToday(today);
 
-  const weekContainer = document.querySelector(".week-container");
-  const dayElements = weekContainer.querySelectorAll(".day");
-
-  weatherData.days.slice(1, 8).forEach((day, index) => {
-    const dayElement = dayElements[index];
-    const formattedDate = formatDate(day.datetime);
-    processWeatherData(day, dayElement, formattedDate);
+  weatherData.days.slice(1, 8).forEach((day) => {
+    processWeatherData(day);
   });
-}
-
-function processWeatherData(day, dayElement, date) {
-  dayElement.querySelector(".date h3").textContent = date;
-  dayElement.querySelector(
-    ".icon"
-  ).src = require(`./img/WeatherIcons/${day.icon}.svg`);
-  dayElement.querySelector(".day > p").innerHTML = `${day.temp}&deg;${
-    unit === "metric" ? "C" : "F"
-  }`;
-
-  dayElement.querySelector(".day >.day-conditions").textContent =
-    day.conditions;
 }
 
 function processWeatherDataToday(data) {
@@ -59,7 +41,7 @@ function processWeatherDataToday(data) {
   document.querySelector(
     ".icon"
   ).src = require(`./img/WeatherIcons/${data.icon}.svg`);
-  document.querySelector(".current > h2").innerHTML = `${data.temp}&deg;${
+  document.querySelector(".current > h2").innerHTML = `${data.temp} &deg;${
     unit === "metric" ? "C" : "F"
   }`;
   document.querySelector(".date > h2").textContent = formatDate(data.datetime);
@@ -138,6 +120,13 @@ function formatDate(datetime) {
     month: "long",
     day: "numeric",
   }).format(date);
+}
+function processWeatherData(data) {
+  // console.log(data);
+  console.log(data.datetime);
+  console.log(data.temp);
+  console.log(data.feelslike);
+  console.log(data.conditions);
 }
 
 function toggleUnit() {
