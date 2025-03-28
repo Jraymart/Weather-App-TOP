@@ -5,7 +5,7 @@ import "./reset.css";
 // Key: YEK9UJXMAXYY8F3CUHTJCWD3E
 const virtualCrossingURL =
   "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
-const virtualCrossingKey = "?key=YEK9UJXMAXYY8F3CUHTJCWD3E";
+const virtualCrossingKey = "";
 
 const currentDate = new Date().toJSON().slice(0, 10);
 
